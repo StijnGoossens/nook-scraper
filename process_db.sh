@@ -14,6 +14,7 @@ exit
 EOF
 adb pull /data/data/com.bn.nook.reader.activities/databases/
 
+# Export the annotations to CSV with sqlite
 sqlite3 databases/annotations.db <<EOF
 .mode csv
 .headers on
@@ -22,6 +23,7 @@ select ean, highlighttext, pagenumber, timestamp from annotations order by ean;
 #.system open annotations.csv
 EOF
 
+# Export the latest id for every ean code to CSV with sqlite
 sqlite3 databases/annotations.db <<EOF
 .mode csv
 .headers on
@@ -30,4 +32,5 @@ select ean, max(_id) from annotations group by ean;
 #.system open ean_codes.csv
 EOF
 
+# Process the exported data into CSV's with the annotations per book
 python process_annotations.py
