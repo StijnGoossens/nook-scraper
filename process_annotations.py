@@ -1,6 +1,7 @@
-import pandas as pd
-from datetime import date
 import os
+from datetime import date
+
+import pandas as pd
 
 from config import MIN_ANNOTATION_ID
 
