@@ -2,17 +2,19 @@ import pandas as pd
 from datetime import date
 import os
 
-from min_annotation_id import min_annotation_id
+from config import MIN_ANNOTATION_ID
 
-today = date.today().strftime("%Y%m%d")
-os.mkdir(f"extract_{today}")
+# Read the exported CSV files.
+annotations_df = pd.read_csv("annotations.csv") # Has columns ean, highlighttext, pagenumber, timestamp
+ean_df = pd.read_csv("ean_codes.csv") # Has columns ean, max(_id)
 
-annotations_df = pd.DataFrame.from_csv("annotations.csv")
-ean_df = pd.DataFrame.from_csv("ean_codes.csv")
-ean_df.columns = ["id"]
+# Merge the two dataframes together.
+ean_df.columns = ["ean", "id"]
+df = annotations_df.merge(ean_df, on=["ean"])
 
-df = annotations_df.join(ean_df)
-
+# Export the highlights for every book separatly.
+extract_folder = f"extract_{date.today().strftime('%Y%m%d')}"
+os.mkdir(extract_folder)
 for book_id in list(df["id"]):
-    if book_id > min_annotation_id:
-        df[df.id == book_id].to_csv(f"extract_{today}/annotations_{book_id}.csv")
+    if book_id > MIN_ANNOTATION_ID:
+        df[df.id == book_id].to_csv(os.path.join(extract_folder, f"annotations_{book_id}.csv"))

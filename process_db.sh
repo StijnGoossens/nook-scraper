@@ -7,7 +7,7 @@ set -e
 
 export PATH=$PATH:~/.android-sdk/platform-tools/
 # The IP address migh change over time. Adapt it as needed.
-adb connect 192.168.0.120:5555
+adb connect 192.168.0.176:5555
 adb shell <<EOF
 mount -o remount,rw /dev/block/mmcblk0p5 /system
 exit

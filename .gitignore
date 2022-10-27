@@ -1,0 +1,5 @@
+/extract_*
+databases
+annotations.csv
+ean_codes.csv
+*.pyc
