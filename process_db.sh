@@ -23,6 +23,15 @@ select ean, highlighttext, pagenumber, timestamp from annotations order by ean;
 #.system open annotations.csv
 EOF
 
+# Export notes to CSV.
+sqlite3 databases/annotations.db <<EOF
+.mode csv
+.headers on
+.once notes.csv
+select ean, highlighttext, note, pagenumber, timestamp from annotations where note is not null order by ean;
+#.system open notes.csv
+EOF
+
 # Export the latest id for every ean code to CSV with sqlite
 sqlite3 databases/annotations.db <<EOF
 .mode csv

@@ -1,5 +1,7 @@
-/extract_*
+/annotations_*
+/notes_*
 databases
 annotations.csv
+notes.csv
 ean_codes.csv
 *.pyc
