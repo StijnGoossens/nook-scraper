@@ -2,6 +2,7 @@
 /notes_*
 databases
 annotations.csv
+highlights.csv
 notes.csv
 ean_codes.csv
 *.pyc

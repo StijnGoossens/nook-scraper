@@ -42,4 +42,5 @@ select ean, max(_id) from annotations group by ean;
 EOF
 
 # Process the exported data into CSV's with the annotations per book
-python process_annotations.py
+# python process_annotations.py
+/Users/stijngoossens/opt/anaconda3/envs/pytorch-aml-env/bin/python process_annotations.py
